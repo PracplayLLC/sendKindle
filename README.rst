@@ -8,9 +8,10 @@
   :target: http://unmaintained.tech/
   :alt: No Maintenance Intended
 
-**sendKindle is no longer maintained!**
-
-If you feel that sendKindle should be resurrected, please fork this project and work on your improvements. I'll gladly redirect people to your new version.
+this is a fork of kparal's sendKindle.
+it has the same features but it will warn + ignore missing password, rather than requiring you to enter one.
+(this is appropriate for other forms of smtp relay authentication.)
+small but useful change.  thanks for @kparal for original work, still a useful piece of software.
 
 ----
 
