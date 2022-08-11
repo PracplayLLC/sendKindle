@@ -100,10 +100,10 @@ convert = False'''
             self.smtp_login = config.get('Default', 'smtp_login')
             self.user_email = config.get('Default', 'user_email')
             self.kindle_email = config.get('Default', 'kindle_email')
-            if config.has_option('Default', 'smtp_password'):
+            #if config.has_option('Default', 'smtp_password'):
                 # prefer value from cmdline option
-                self.smtp_password = (self.smtp_password or
-                                      config.get('Default', 'smtp_password'))
+                #self.smtp_password = (self.smtp_password or
+                #                      config.get('Default', 'smtp_password'))
             if config.has_option('Default', 'convert'):
                 # prefer value from cmdline option
                 self.convert = (self.convert or
@@ -142,8 +142,10 @@ convert = False'''
 
     def check_args(self):
         if not self.smtp_password:
-            self.smtp_password = getpass.getpass('Password for %s: '
-                                                 % self.user_email)
+            print("no password defined");
+
+            #self.smtp_password = getpass.getpass('Password for %s: '
+            #                                     % self.user_email)
 
 
     def send_mail(self):
@@ -169,13 +171,9 @@ convert = False'''
 
         # send email
         try:
-            if self.smtp_port == 587:
-                mail_server = smtplib.SMTP(host=self.smtp_server, port=self.smtp_port)
-                mail_server.starttls()
-            else:
-                mail_server = smtplib.SMTP_SSL(host=self.smtp_server, port=self.smtp_port)
-
-            mail_server.login(self.smtp_login, self.smtp_password)
+            mail_server = smtplib.SMTP_SSL(host=self.smtp_server,
+                                          port=self.smtp_port)
+            #mail_server.login(self.smtp_login, self.smtp_password)
             mail_server.sendmail(self.user_email, self.kindle_email, msg)
             mail_server.close()
         except smtplib.SMTPException:
